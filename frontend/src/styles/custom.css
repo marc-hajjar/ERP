@@ -1,0 +1,273 @@
+/* ─── ProjectDetail ─────────────────────────────────────────────────────── */
+
+.pd-header            { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.pd-title-row         { display: flex; align-items: center; gap: 10px; }
+.pd-page-title        { margin-bottom: 0; }
+.pd-project-number    { color: var(--accent); font-size: 0.82rem; margin-top: 2px; }
+
+.pd-overview-grid     { margin-bottom: 24px; }
+.pd-detail-value      { font-weight: 600; font-size: 0.95rem; }
+
+.pd-description-card  { margin-bottom: 20px; }
+.pd-description-text  { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.7; }
+
+.pd-cost-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+.pd-cost-item  {
+  text-align: center;
+  padding: 16px 12px;
+  background: var(--bg-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.pd-cost-label { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px; }
+.pd-cost-value { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; }
+
+.pd-tab-header { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+
+.pd-empty-cell { text-align: center; color: var(--text-muted); padding: 32px; }
+
+/* Expenses table */
+.pd-expense-category    { text-transform: capitalize; }
+.pd-expense-total-row   { background: var(--bg-surface); }
+.pd-expense-total-label { font-weight: 700; text-align: right; padding-right: 16px; }
+.pd-expense-total-value { font-weight: 700; color: var(--accent); }
+
+/* ─── Utilities ──────────────────────────────────────────────────────────── */
+.cap            { text-transform: capitalize; }
+.mb-20          { margin-bottom: 20px; }
+.mb-24          { margin-bottom: 24px; }
+.text-green     { color: var(--green); }
+.text-red       { color: var(--red); }
+.opt-capitalize { text-transform: capitalize; }
+
+/* ─── Table cell helpers ─────────────────────────────────────────────────── */
+.td-bold          { font-weight: 600; }
+.td-medium        { font-weight: 500; }
+.td-medium-cap    { font-weight: 500; text-transform: capitalize; }
+.td-secondary     { color: var(--text-secondary); }
+.td-secondary-cap { color: var(--text-secondary); text-transform: capitalize; }
+.td-accent-bold   { font-weight: 600; color: var(--accent); }
+.td-muted         { color: var(--text-muted); }
+.td-rate-suffix   { color: var(--text-muted); font-weight: 400; }
+.tr-clickable     { cursor: pointer; }
+.select-inline    { padding: 4px 8px; font-size: 0.75rem; width: auto; }
+.action-cell      { display: flex; gap: 6px; }
+
+/* Two-line table cell */
+.cell-name       { font-weight: 500; }
+.cell-name-bold  { font-weight: 600; }
+.cell-sub        { font-size: 0.72rem; color: var(--text-muted); }
+.cell-sub-accent { font-size: 0.72rem; color: var(--accent); }
+
+/* Semantic text colors for ghost buttons */
+.btn-text-green { color: var(--green); }
+.btn-text-red   { color: var(--red); }
+
+/* Filter count label */
+.filter-count { color: var(--text-muted); font-size: 0.82rem; }
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────── */
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  z-index: 100; overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-logo-wrap     { width: 36px; height: 36px; }
+.sidebar-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.sidebar-brand-name    { font-family: var(--font-heading); font-weight: 800; font-size: 1rem; color: var(--text-primary); line-height: 1.1; }
+.sidebar-brand-sub     { font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.08em; }
+.sidebar-nav           { padding: 10px; flex: 1; }
+.sidebar-item          { margin-bottom: 2px; }
+.sidebar-module-btn {
+  width: 100%; display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: var(--radius);
+  background: transparent; border: none; cursor: pointer;
+  color: var(--text-secondary); font-size: 0.875rem; font-weight: 400;
+  font-family: var(--font-body);
+}
+.sidebar-module-btn.active { background: rgba(59,130,246,0.08); color: var(--accent); font-weight: 600; }
+.sidebar-label             { flex: 1; text-align: left; }
+.sidebar-chevron           { transition: transform 0.2s; }
+.sidebar-submenu           { padding-left: 14px; padding-bottom: 4px; }
+.sidebar-navlink {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: var(--radius);
+  color: var(--text-secondary); background: transparent;
+  text-decoration: none; font-size: 0.875rem; font-weight: 400;
+  margin-bottom: 2px;
+}
+.sidebar-navlink.active { color: var(--accent); background: rgba(59,130,246,0.10); font-weight: 600; }
+.sidebar-link {
+  display: flex; align-items: center;
+  padding: 7px 10px; border-radius: var(--radius);
+  color: var(--text-muted); background: transparent;
+  text-decoration: none; font-size: 0.82rem; font-weight: 400;
+  border-left: 2px solid var(--border); margin-bottom: 1px;
+}
+.sidebar-link.active { color: var(--accent); background: rgba(59,130,246,0.10); border-left-color: var(--accent); font-weight: 600; }
+.sidebar-footer { padding: 14px 18px; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--text-muted); }
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.app-header {
+  height: var(--header-height);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; position: sticky; top: 0; z-index: 50;
+}
+.header-breadcrumb { display: flex; align-items: center; gap: 8px; }
+.header-module     { font-family: var(--font-heading); font-weight: 700; font-size: 1rem; }
+.header-sep        { color: var(--border-light); }
+.header-page       { color: var(--text-secondary); font-size: 0.9rem; }
+.header-actions    { display: flex; align-items: center; gap: 12px; }
+.header-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: #fff;
+}
+
+/* ─── Dashboard ──────────────────────────────────────────────────────────── */
+.pipeline-list      { display: flex; flex-direction: column; gap: 12px; }
+.pipeline-row       { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.pipeline-row-label { font-size: 0.82rem; color: var(--text-secondary); }
+.pipeline-row-count { font-size: 0.82rem; font-weight: 600; }
+.stock-alert-banner {
+  background: var(--red-bg);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.stock-alert-text { color: var(--red); font-weight: 500; }
+
+/* ─── CRM Dashboard ──────────────────────────────────────────────────────── */
+.pipeline-stages      { display: flex; gap: 8px; }
+.pipeline-stage-col   { flex: 1; text-align: center; }
+.pipeline-stage-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 6px; text-transform: capitalize; font-weight: 600; }
+.comm-list        { display: flex; flex-direction: column; gap: 10px; }
+.comm-item        { padding: 10px 12px; background: var(--bg-surface); border-radius: var(--radius); border: 1px solid var(--border); }
+.comm-item-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.comm-sender      { font-weight: 600; font-size: 0.82rem; }
+.badge-xs         { font-size: 0.65rem; }
+.comm-summary     { font-size: 0.8rem; color: var(--text-secondary); margin: 0; }
+.comm-date        { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+
+/* ─── Clients ────────────────────────────────────────────────────────────── */
+.company-cell { display: flex; align-items: center; gap: 5px; color: var(--text-secondary); }
+.contact-cell { display: flex; flex-direction: column; gap: 2px; }
+.contact-row  { display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--text-secondary); }
+
+/* ─── Inventory Dashboard ────────────────────────────────────────────────── */
+.empty-state-ok  { color: var(--green); }
+.low-stock-list  { display: flex; flex-direction: column; gap: 8px; }
+.low-stock-item  {
+  padding: 10px 12px;
+  background: var(--red-bg);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.low-stock-name    { font-weight: 600; font-size: 0.875rem; }
+.low-stock-cat     { font-size: 0.75rem; color: var(--text-muted); text-transform: capitalize; }
+.low-stock-right   { text-align: right; }
+.low-stock-qty     { color: var(--red); font-weight: 700; }
+.low-stock-reorder { font-size: 0.72rem; color: var(--text-muted); }
+
+/* ─── Total badge (Expenses / StockList) ─────────────────────────────────── */
+.total-badge       { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 14px; }
+.total-badge-label { color: var(--text-muted); font-size: 0.8rem; }
+.total-badge-value { font-weight: 700; color: var(--accent); }
+
+/* ─── StockList ──────────────────────────────────────────────────────────── */
+.item-name-flex { display: flex; align-items: center; gap: 6px; }
+
+/* ─── Accounting Dashboard ───────────────────────────────────────────────── */
+.cat-list  { display: flex; flex-direction: column; gap: 10px; }
+.cat-row   { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.cat-name  { font-size: 0.82rem; color: var(--text-secondary); text-transform: capitalize; }
+.cat-value { font-size: 0.82rem; font-weight: 600; }
+
+/* ─── Projects Dashboard ─────────────────────────────────────────────────── */
+.fin-list  { display: flex; flex-direction: column; gap: 16px; }
+.fin-row   { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.fin-label { color: var(--text-secondary); font-size: 0.875rem; }
+.fin-value { font-family: var(--font-heading); font-weight: 700; }
+
+/* ─── Responsive Sidebar & Layout ───────────────────────────────────────── */
+
+/* Hamburger: hidden on desktop */
+.mobile-menu-btn { display: none !important; }
+
+/* Sidebar overlay: hidden on desktop */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 199;
+}
+
+/* Shrink sidebar at intermediate widths */
+@media (max-width: 992px) {
+  :root { --sidebar-width: 200px; }
+  .sidebar-brand-sub { display: none; }
+}
+
+@media (max-width: 768px) {
+  :root { --sidebar-width: 180px; }
+  .sidebar-brand-name { font-size: 0.875rem; }
+  .content-grid { grid-template-columns: 1fr; }
+}
+
+/* Mobile: sidebar becomes a slide-in drawer */
+@media (max-width: 576px) {
+  :root { --sidebar-width: 0px; }
+
+  .sidebar {
+    width: 240px;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 200;
+  }
+  .sidebar.mobile-open { transform: translateX(0); }
+
+  .sidebar-overlay { display: block; }
+
+  .main-content { margin-left: 0 !important; }
+
+  .mobile-menu-btn { display: flex !important; }
+
+  .app-header { padding: 0 14px; }
+  .page-body  { padding: 14px; }
+
+  .stat-grid  { grid-template-columns: 1fr 1fr; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .content-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; align-items: flex-start; }
+
+  /* Visible scrollbar under scrollable tables */
+  .table-wrapper {
+    /* right-edge fade hint so user knows content continues */
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+    padding-bottom: 6px;
+  }
+  .table-wrapper::-webkit-scrollbar       { height: 4px; }
+  .table-wrapper::-webkit-scrollbar-track { background: var(--border); border-radius: 4px; }
+  .table-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.45); border-radius: 4px; }
+  /* Firefox */
+  .table-wrapper { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.45) var(--border); }
+}
